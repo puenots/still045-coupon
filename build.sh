@@ -23,8 +23,7 @@ DJS=("DJ TAC|tac" "UE|ue" "KEIGO|keigo" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuk
 sed \
  -e 's|ディスカウントクーポン{{TITLE_SUFFIX}}|関係者ディスカウントクーポン{{TITLE_SUFFIX}}|' \
  -e 's|<div class="subtitle">ディスカウントクーポン</div>|<div class="subtitle">関係者ディスカウントクーポン</div>|' \
- -e 's|linear-gradient(135deg, var(--orange) 0%, #c9631f 100%)|linear-gradient(135deg, #f0e4c8 0%, #d9c69a 100%)|' \
- -e 's|box-shadow: 0 6px 24px rgba(224, 122, 53, 0.35);|box-shadow: 0 6px 24px rgba(233, 216, 180, 0.25);|' \
+ -e 's|--price: #f09a53;|--price: #e9d8b4;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">¥1,000</div>|' \
  -e 's|aria-label="ディスカウントクーポン">|aria-label="関係者ディスカウントクーポン">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">関係者専用</div>|' \
