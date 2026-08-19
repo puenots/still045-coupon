@@ -40,7 +40,7 @@ sed \
  -e 's|--ticket-b: #c9631f;|--ticket-b: #5e93bd;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
- -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">音楽関係者のみ</div>|' \
+ -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト（音楽関係者のみ）</div>|' \
  _template_discount.html > _template_free.html
 echo "wrote  _template_free.html"
 
