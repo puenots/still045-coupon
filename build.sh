@@ -18,6 +18,7 @@ GA4_ID="G-4N9ENSKWVH"
 
 # "表示名|スラッグ"
 DJS=("DJ TAC|tac" "UE|ue" "KEIGO|keigo" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "TAKEDA|takeda")
+FREE_DJS=("UE|ue")
 
 # _template_artist.html を discount 版から派生させる
 sed \
@@ -30,6 +31,18 @@ sed \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">関係者専用</div>|' \
  _template_discount.html > _template_artist.html
 echo "wrote  _template_artist.html"
+
+# _template_free.html を discount 版から派生させる
+sed \
+ -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|FREE PASS{{TITLE_SUFFIX}}|' \
+ -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Free Pass</div>|' \
+ -e 's|--ticket-a: #e07a35;|--ticket-a: #8dbbdd;|' \
+ -e 's|--ticket-b: #c9631f;|--ticket-b: #5e93bd;|' \
+ -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
+ -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
+ -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト</div>|' \
+ _template_discount.html > _template_free.html
+echo "wrote  _template_free.html"
 
 # ルートページ: クーポン・招待セクションを除いたイベント案内（カウントダウンは残す）
 sed \
@@ -46,7 +59,8 @@ echo "wrote  index.html"
 # (dj, slug) を1行ずつ書く一時ファイル
 disc_map=$(mktemp)
 artist_map=$(mktemp)
-trap 'rm -f "$disc_map" "$artist_map"' EXIT
+free_map=$(mktemp)
+trap 'rm -f "$disc_map" "$artist_map" "$free_map"' EXIT
 
 generate() {
   local dj="$1"
@@ -73,6 +87,12 @@ for entry in "${DJS[@]}"; do
   generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map"
 done
 
+for entry in "${FREE_DJS[@]}"; do
+  dj="${entry%%|*}"
+  slug="${entry##*|}"
+  generate "$dj" "${slug}-free" "_template_free.html" "$free_map"
+done
+
 {
   echo "# STILL 045 — クーポンURL一覧"
   echo
@@ -97,6 +117,14 @@ done
   while IFS=$'\t' read -r dj dir; do
     echo "| ${dj} | ${BASE_URL}/${dir}/ |"
   done < "$artist_map"
+  echo
+  echo "**DJ別 フリーパス（FREE）:**"
+  echo
+  echo "| DJ | URL |"
+  echo "|----|-----|"
+  while IFS=$'\t' read -r dj dir; do
+    echo "| ${dj} | ${BASE_URL}/${dir}/ |"
+  done < "$free_map"
   echo
   echo "## ビルド"
   echo

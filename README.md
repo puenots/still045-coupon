@@ -30,6 +30,12 @@
 | Yuuki | https://045.djue.me/yuuki-sp/ |
 | TAKEDA | https://045.djue.me/takeda-sp/ |
 
+**DJ別 フリーパス（FREE）:**
+
+| DJ | URL |
+|----|-----|
+| UE | https://045.djue.me/ue-free/ |
+
 ## ビルド
 
 ```bash
