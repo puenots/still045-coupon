@@ -87,26 +87,31 @@
     text-transform: uppercase;
   }
 
-  .invited-name {
-    display: block;
-    font-family: "Playfair Display", serif;
-    font-weight: 800;
-    font-size: clamp(32px, 10.5vw, 44px);
-    line-height: 1.1;
-    letter-spacing: 1px;
-    color: var(--cream);
-    margin-top: 4px;
-  }
-
   .coupon {
     width: 100%;
     background: linear-gradient(135deg, var(--ticket-a) 0%, var(--ticket-b) 100%);
     border-radius: 16px;
-    padding: 10px;
+    padding: 16px 20px 18px;
     position: relative;
     box-shadow: 0 10px 34px rgba(0, 0, 0, 0.45);
   }
-  .coupon::before, .coupon::after {
+  .coupon .label { color: rgba(11, 20, 36, 0.7); }
+  .invited-name {
+    display: block;
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: clamp(34px, 11vw, 46px);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    color: var(--night);
+    margin-top: 2px;
+  }
+  .coupon-divider {
+    border-top: 2px dashed rgba(11, 20, 36, 0.45);
+    margin: 14px -20px 12px;
+    position: relative;
+  }
+  .coupon-divider::before, .coupon-divider::after {
     content: "";
     position: absolute;
     width: 22px;
@@ -116,14 +121,8 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  .coupon::before { left: -11px; }
-  .coupon::after { right: -11px; }
-  .coupon-inner {
-    border: 2px dashed rgba(11, 20, 36, 0.4);
-    border-radius: 10px;
-    padding: 14px 16px 16px;
-  }
-  .coupon .label { color: rgba(11, 20, 36, 0.7); }
+  .coupon-divider::before { left: -11px; }
+  .coupon-divider::after { right: -11px; }
   .coupon-tag:empty { display: none; }
   .coupon-tag {
     display: inline-block;
@@ -272,9 +271,6 @@
   <main class="wrap">
     <h1 class="title"><img class="logo" src="logo.png" alt="STILL 045"></h1>
     <div class="subtitle">The Sound of Those Days</div>
-
-    <div class="rule"></div>
-
 
     <div class="rule"></div>
 
