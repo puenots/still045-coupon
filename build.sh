@@ -21,20 +21,20 @@ DJS=("DJ TAC|tac" "UE|ue" "KEIGO|keigo" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuk
 
 # _template_artist.html を discount 版から派生させる
 sed \
- -e 's|ディスカウントクーポン{{TITLE_SUFFIX}}|関係者ディスカウントクーポン{{TITLE_SUFFIX}}|' \
- -e 's|<div class="subtitle">ディスカウントクーポン</div>|<div class="subtitle">関係者ディスカウントクーポン</div>|' \
+ -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|GUEST PASS{{TITLE_SUFFIX}}|' \
+ -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Guest Pass</div>|' \
  -e 's|--ticket-a: #e07a35;|--ticket-a: #f0e4c8;|' \
  -e 's|--ticket-b: #c9631f;|--ticket-b: #d9c69a;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">¥1,000</div>|' \
- -e 's|aria-label="ディスカウントクーポン">|aria-label="関係者ディスカウントクーポン">|' \
+ -e 's|aria-label="ディスカウントパス">|aria-label="関係者パス">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">関係者専用</div>|' \
  _template_discount.html > _template_artist.html
 echo "wrote  _template_artist.html"
 
 # ルートページ: クーポン・招待セクションを除いたイベント案内（カウントダウンは残す）
 sed \
- -e 's|<title>STILL 045 — ディスカウントクーポン{{TITLE_SUFFIX}}</title>|<title>STILL 045 — 8/22 (SAT) @ BOOGIE 54</title>|' \
- -e 's|<div class="subtitle">ディスカウントクーポン</div>|<div class="subtitle">The Sound of Those Days</div>|' \
+ -e 's|<title>STILL 045 — DISCOUNT PASS{{TITLE_SUFFIX}}</title>|<title>STILL 045 — 8/22 (SAT) @ BOOGIE 54</title>|' \
+ -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">The Sound of Those Days</div>|' \
  -e '/<section class="invited"/,/<\/section>/d' \
  -e '/<section class="coupon"/,/<\/section>/d' \
  -e "s|{{GA4_ID}}|${GA4_ID}|g" \
