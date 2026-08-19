@@ -344,7 +344,7 @@
         var h = Math.floor((ms % 86400000) / 3600000);
         var m = Math.floor((ms % 3600000) / 60000);
         var s = Math.floor((ms % 60000) / 1000);
-        subEl.textContent = "8/22 (SAT) 18:00 スタートまで";
+        subEl.textContent = "8/22 (SAT) 18:00 スタート";
         mainEl.textContent = (d > 0 ? d + "日 " : "") + pad(h) + ":" + pad(m) + ":" + pad(s);
         mainEl.classList.remove("live");
       }
