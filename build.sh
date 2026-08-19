@@ -29,6 +29,7 @@ sed \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">¥1,000</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="関係者パス">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">関係者専用</div>|' \
+ -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | GUEST PASS ¥2,500 → ¥1,000@' \
  _template_discount.html > _template_artist.html
 echo "wrote  _template_artist.html"
 
@@ -41,6 +42,7 @@ sed \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト（音楽関係者のみ）</div>|' \
+ -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | FREE PASS（音楽関係者のみ）@' \
  _template_discount.html > _template_free.html
 echo "wrote  _template_free.html"
 
@@ -48,10 +50,12 @@ echo "wrote  _template_free.html"
 sed \
  -e 's|<title>STILL 045 — DISCOUNT PASS{{TITLE_SUFFIX}}</title>|<title>STILL 045 — 8/22 (SAT) @ BOOGIE 54</title>|' \
  -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">The Sound of Those Days</div>|' \
+ -e 's#STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000#STILL 045 | 8/22 (SAT) @ BOOGIE 54#' \
  -e '/<section class="invited"/,/<\/section>/d' \
  -e '/<section class="coupon"/,/<\/section>/d' \
  -e "s|{{GA4_ID}}|${GA4_ID}|g" \
  -e "s|{{BASE_URL}}|${BASE_URL}|g" \
+ -e "s|{{OG_IMAGE}}|${BASE_URL}/ogp.jpg|g" \
  -e 's|{{LOGO_SRC}}|logo.png|g' \
  _template_discount.html > index.html
 echo "wrote  index.html"
@@ -75,6 +79,7 @@ generate() {
       -e "s|{{TITLE_SUFFIX}}| (${dj})|g" \
       -e "s|{{GA4_ID}}|${GA4_ID}|g" \
       -e "s|{{BASE_URL}}|${BASE_URL}|g" \
+      -e "s|{{OG_IMAGE}}|${BASE_URL}/og/${dir}.jpg|g" \
       -e 's|{{LOGO_SRC}}|../logo.png|g' \
       "$template" > "${dir}/index.html"
   echo "wrote  ${dir}/index.html"
