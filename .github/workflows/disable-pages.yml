@@ -1,0 +1,24 @@
+name: Disable Pages after event
+
+# 2026-08-24 00:00 JST (= 2026-08-23 15:00 UTC) に GitHub Pages を無効化し、
+# 全URLを 404 にする。イベントは 8/22 18:00 – 8/23 早朝なので丸1日の余裕を持たせる。
+# Actions schedule は最大数十分の遅延がある点に注意。
+# 手動トリガー (workflow_dispatch) も用意してあるので前倒し停止も可能。
+on:
+  schedule:
+    - cron: "0 15 23 8 *"
+  workflow_dispatch:
+
+permissions:
+  pages: write
+
+jobs:
+  disable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disable GitHub Pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api -X DELETE /repos/${{ github.repository }}/pages
+          echo "Pages disabled at $(date -u +%FT%TZ) UTC"

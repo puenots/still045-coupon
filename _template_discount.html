@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1424">
+<meta name="robots" content="noindex, nofollow">
+<title>STILL 045 — ディスカウントクーポン{{TITLE_SUFFIX}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=DM+Sans:wght@400;500;700&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id={{GA4_ID}}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  if ("{{GA4_ID}}".indexOf("G-") === 0) {
+    gtag("js", new Date());
+    gtag("config", "{{GA4_ID}}");
+  }
+</script>
+<style>
+  :root {
+    --night: #0b1424;
+    --night-2: #131f33;
+    --card: #16233a;
+    --line: rgba(233, 216, 180, 0.22);
+    --cream: #e9d8b4;
+    --cream-dim: rgba(233, 216, 180, 0.72);
+    --orange: #e07a35;
+    --orange-2: #f09a53;
+    --blue: #7fb2d9;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: var(--night);
+    color: var(--cream);
+    font-family: "DM Sans", "Noto Sans JP", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 85% -5%, rgba(224, 122, 53, 0.28) 0%, transparent 40%),
+      radial-gradient(circle at 10% 110%, rgba(127, 178, 217, 0.14) 0%, transparent 45%);
+  }
+  .wrap {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .titleblock { text-align: center; line-height: 1; }
+  .title { margin: 0; }
+  .logo {
+    display: block;
+    width: min(52vw, 200px);
+    margin: 0 auto;
+    filter: drop-shadow(0 0 22px rgba(224, 122, 53, 0.25));
+  }
+  .subtitle {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-indent: 4px;
+    color: var(--blue);
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .invited {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 10px 14px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .invited-label {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+  }
+  .invited-name {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: clamp(30px, 10vw, 42px);
+    line-height: 1.1;
+    letter-spacing: 1px;
+    color: var(--orange-2);
+  }
+  .coupon-tag:empty { display: none; }
+  .coupon-tag {
+    display: inline-block;
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-indent: 3px;
+    color: var(--cream);
+    background: var(--night);
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 4px;
+  }
+
+  .coupon {
+    width: 100%;
+    background: linear-gradient(135deg, var(--orange) 0%, #c9631f 100%);
+    color: var(--night);
+    border-radius: 14px;
+    padding: 13px 18px 15px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(224, 122, 53, 0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .coupon::before, .coupon::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--night);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .coupon::before { left: -10px; }
+  .coupon::after { right: -10px; }
+
+  .coupon-label {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: rgba(11, 20, 36, 0.75);
+    text-transform: uppercase;
+  }
+  .coupon-was {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: rgba(11, 20, 36, 0.65);
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    margin-top: 4px;
+  }
+  .coupon-value {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: clamp(56px, 17vw, 76px);
+    line-height: 1;
+    color: var(--night);
+    margin: 1px 0 2px;
+    letter-spacing: 1px;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+  }
+  .coupon-sub {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    color: rgba(11, 20, 36, 0.85);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  .clock {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 9px 16px 11px;
+    text-align: center;
+  }
+  .clock-label {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+  }
+  .clock-date {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--cream);
+    margin-top: 2px;
+    letter-spacing: 1px;
+  }
+  .clock-time {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: clamp(30px, 9.5vw, 42px);
+    line-height: 1;
+    color: var(--orange-2);
+    margin-top: 3px;
+    letter-spacing: 2px;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
+  }
+  .clock-time.live {
+    animation: glow 1.6s ease-in-out infinite;
+  }
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 6px rgba(224, 122, 53, 0.25); }
+    50% { text-shadow: 0 0 26px rgba(224, 122, 53, 0.75); }
+  }
+
+  .event {
+    width: 100%;
+    background: var(--night-2);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .event-date {
+    font-family: "Playfair Display", serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    font-variant-numeric: lining-nums;
+    font-feature-settings: "lnum" 1;
+  }
+  .event-date .accent { color: var(--orange-2); }
+  .event-meta {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 11px;
+    margin-top: 3px;
+    color: var(--cream-dim);
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+  .event-meta a {
+    color: var(--cream);
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+  }
+
+  .info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 10px;
+    background: rgba(233, 216, 180, 0.05);
+    border-left: 3px solid var(--orange);
+    border-radius: 6px;
+  }
+  .info-key {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--cream-dim);
+    text-transform: uppercase;
+    flex: 0 0 50px;
+    padding-top: 2px;
+  }
+  .info-val {
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 12px;
+    color: var(--cream);
+    flex: 1;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+  .info-val .accent { color: var(--orange-2); font-weight: 700; }
+
+  .genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 4px;
+  }
+  .genre-tag {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    background: rgba(233, 216, 180, 0.12);
+    border: 1px solid var(--line);
+    color: var(--cream);
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+  }
+  .genre-tag.decade { background: var(--orange); border-color: var(--orange); color: var(--night); }
+
+  .tagline {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--cream-dim);
+    text-align: center;
+    text-transform: uppercase;
+    margin: 2px 0 0;
+  }
+  .tagline .star { color: var(--orange-2); }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="titleblock">
+      <h1 class="title"><img class="logo" src="{{LOGO_SRC}}" alt="STILL 045"></h1>
+    </div>
+    <div class="subtitle">ディスカウントクーポン</div>
+
+    <section class="invited" aria-label="招待元">
+      <span class="invited-label">Invited by</span>
+      <span class="invited-name">{{DJ_NAME}}</span>
+    </section>
+
+    <section class="coupon" aria-label="ディスカウントクーポン">
+      <div class="coupon-tag"></div>
+      <div class="coupon-label">Door Charge</div>
+      <div class="coupon-was">¥2,500</div>
+      <div class="coupon-value">¥2,000</div>
+      <div class="coupon-sub">この画面を入口スタッフにお見せください（スクリーンショット可）</div>
+    </section>
+
+    <section class="clock" aria-label="カウントダウン">
+      <div class="clock-label">Countdown</div>
+      <div class="clock-date" id="cd-sub">—</div>
+      <div class="clock-time" id="cd-main">--</div>
+    </section>
+
+    <section class="event" aria-label="イベント情報">
+      <div class="event-date">2026 / <span class="accent">8 / 22</span> (SAT)</div>
+      <div class="event-meta">18:00 – Late @ BOOGIE 54<br><a href="https://www.google.com/maps/search/?api=1&query=%E6%A8%AA%E6%B5%9C%E5%B8%82%E4%B8%AD%E5%8C%BA%E9%95%B7%E8%80%85%E7%94%BA6-111" target="_blank" rel="noopener">📍 横浜市中区長者町6-111 B1F</a></div>
+    </section>
+
+    <section class="info" aria-label="イベント詳細">
+      <div class="info-row">
+        <div class="info-key">Guest</div>
+        <div class="info-val"><span class="accent">DJ TAC</span></div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">DJs</div>
+        <div class="info-val">UE / KEIGO / 鍋奉行 / BAPE</div>
+      </div>
+      <div class="info-row">
+        <div class="info-key">Music</div>
+        <div class="info-val">
+          HIP-HOP · R&amp;B · REGGAE · SOUL · FUNK
+          <div class="genres">
+            <span class="genre-tag">Throwback</span>
+            <span class="genre-tag decade">70s</span>
+            <span class="genre-tag decade">80s</span>
+            <span class="genre-tag decade">90s</span>
+            <span class="genre-tag decade">2000s</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="tagline"><span class="star">★</span> The Sound of Those Days <span class="star">★</span></p>
+  </main>
+
+<script>
+  (function () {
+    var subEl = document.getElementById("cd-sub");
+    var mainEl = document.getElementById("cd-main");
+    var START = new Date("2026-08-22T18:00:00+09:00").getTime();
+    var END = new Date("2026-08-23T06:00:00+09:00").getTime();
+
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+
+    function update() {
+      if (!subEl || !mainEl) return;
+      var now = Date.now();
+      if (now >= END) {
+        subEl.textContent = "8/22 (SAT) @ BOOGIE 54";
+        mainEl.textContent = "終了しました";
+        mainEl.classList.remove("live");
+      } else if (now >= START) {
+        subEl.textContent = "8/22 (SAT) 18:00 – Late";
+        mainEl.textContent = "いま開催中！";
+        mainEl.classList.add("live");
+      } else {
+        var ms = START - now;
+        var d = Math.floor(ms / 86400000);
+        var h = Math.floor((ms % 86400000) / 3600000);
+        var m = Math.floor((ms % 3600000) / 60000);
+        var s = Math.floor((ms % 60000) / 1000);
+        subEl.textContent = "8/22 (SAT) 18:00 スタートまで";
+        mainEl.textContent = (d > 0 ? d + "日 " : "") + pad(h) + ":" + pad(m) + ":" + pad(s);
+        mainEl.classList.remove("live");
+      }
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+</script>
+</body>
+</html>
