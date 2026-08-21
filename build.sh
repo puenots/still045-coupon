@@ -57,6 +57,7 @@ sed \
  -e "s|{{BASE_URL}}|${BASE_URL}|g" \
  -e "s|{{OG_IMAGE}}|${BASE_URL}/ogp.jpg|g" \
  -e 's|{{LOGO_SRC}}|logo.png|g' \
+ -e 's|{{GROUP_NOTE}}||g' \
  _template_discount.html > index.html
 echo "wrote  index.html"
 
@@ -66,11 +67,17 @@ artist_map=$(mktemp)
 free_map=$(mktemp)
 trap 'rm -f "$disc_map" "$artist_map" "$free_map"' EXIT
 
+# 人数注記。空文字なら .coupon-group:empty で非表示になる。
+GROUP_NOTE_DISCOUNT=""
+GROUP_NOTE_ARTIST="1枚で5名まで有効"
+GROUP_NOTE_FREE="1枚で3名まで有効"
+
 generate() {
   local dj="$1"
   local dir="$2"
   local template="$3"
   local map_file="$4"
+  local group_note="$5"
 
   printf '%s\t%s\n' "$dj" "$dir" >> "$map_file"
 
@@ -81,6 +88,7 @@ generate() {
       -e "s|{{BASE_URL}}|${BASE_URL}|g" \
       -e "s|{{OG_IMAGE}}|${BASE_URL}/og/${dir}.jpg|g" \
       -e 's|{{LOGO_SRC}}|../logo.png|g' \
+      -e "s|{{GROUP_NOTE}}|${group_note}|g" \
       "$template" > "${dir}/index.html"
   echo "wrote  ${dir}/index.html"
 }
@@ -88,14 +96,14 @@ generate() {
 for entry in "${DJS[@]}"; do
   dj="${entry%%|*}"
   slug="${entry##*|}"
-  generate "$dj" "$slug" "_template_discount.html" "$disc_map"
-  generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map"
+  generate "$dj" "$slug" "_template_discount.html" "$disc_map" "$GROUP_NOTE_DISCOUNT"
+  generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map" "$GROUP_NOTE_ARTIST"
 done
 
 for entry in "${FREE_DJS[@]}"; do
   dj="${entry%%|*}"
   slug="${entry##*|}"
-  generate "$dj" "${slug}-free" "_template_free.html" "$free_map"
+  generate "$dj" "${slug}-free" "_template_free.html" "$free_map" "$GROUP_NOTE_FREE"
 done
 
 {

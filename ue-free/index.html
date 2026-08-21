@@ -203,6 +203,18 @@
     border-bottom: 2px solid rgba(11, 20, 36, 0.35);
   }
 
+  .coupon-group:empty { display: none; }
+  .coupon-group {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 800;
+    font-size: 12.5px;
+    letter-spacing: 1px;
+    color: var(--night);
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1.5px dotted rgba(11, 20, 36, 0.4);
+  }
+
   .clock-time {
     font-family: "Playfair Display", serif;
     font-weight: 800;
@@ -313,6 +325,7 @@
       <div class="coupon-was">¥2,500</div>
       <div class="coupon-value">FREE</div>
       <div class="coupon-sub">この画面を入口スタッフにお見せください<small>📷 エントランスは電波が入りません<br><strong>スクリーンショットを保存</strong>してお越しください</small></div>
+      <div class="coupon-group">1枚で3名まで有効</div>
     </section>
 
     <div class="rule"></div>
