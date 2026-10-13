@@ -17,6 +17,7 @@
 | 鍋奉行 | https://045.djue.me/nabe/ |
 | BAPE | https://045.djue.me/bape/ |
 | Yuuki | https://045.djue.me/yuuki/ |
+| TAKEDA | https://045.djue.me/takeda/ |
 | BOOGIE54 | https://045.djue.me/boogie54/ |
 
 **DJ別 スペシャル（¥2,500 → ¥1,500）:**
@@ -30,6 +31,7 @@
 | 鍋奉行 | https://045.djue.me/nabe-1500/ |
 | BAPE | https://045.djue.me/bape-1500/ |
 | Yuuki | https://045.djue.me/yuuki-1500/ |
+| TAKEDA | https://045.djue.me/takeda-1500/ |
 | BOOGIE54 | https://045.djue.me/boogie54-1500/ |
 
 **音楽関係者（¥2,500 → ¥1,000・UEのみ発行）:**
