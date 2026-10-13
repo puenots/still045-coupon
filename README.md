@@ -40,6 +40,12 @@
 |----|-----|
 | UE | https://045.djue.me/ue-sp/ |
 
+**フリーパス（FREE・音楽関係者のみ・UEのみ発行）:**
+
+| DJ | URL |
+|----|-----|
+| UE | https://045.djue.me/ue-free/ |
+
 ## ビルド
 
 ```bash

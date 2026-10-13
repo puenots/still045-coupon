@@ -3,6 +3,7 @@
 # - ディスカウント / オレンジ (¥2,500→¥2,000)          : _template_discount.html → ${slug}/
 # - スペシャル / ブルー (¥2,500→¥1,500)                : _template_special.html  → ${slug}-1500/
 # - 音楽関係者 / クリーム (¥2,500→¥1,000・UEのみ発行)  : _template_artist.html   → ${slug}-sp/
+# - フリー / ピンク (FREE・音楽関係者のみ・UEのみ発行)  : _template_free.html     → ${slug}-free/
 # - ルート (イベント案内のみ・クーポンなし) : _template_discount.html から生成 → index.html
 # URLは読めるスラッグ固定（例: /ue/ と /ue-sp/）。独自ドメイン 045.djue.me で公開。
 # _template_special.html / _template_artist.html は _template_discount.html から派生生成する（正本は discount 側）。
@@ -21,6 +22,8 @@ GA4_ID="G-4N9ENSKWVH"
 DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "TAKEDA|takeda" "BOOGIE54|boogie54")
 # 音楽関係者パス (¥1,000) を発行する人
 ARTIST_DJS=("UE|ue")
+# フリーパスを発行する人
+FREE_DJS=("UE|ue")
 
 # _template_artist.html を discount 版から派生させる
 sed \
@@ -47,6 +50,19 @@ sed \
  _template_discount.html > _template_special.html
 echo "wrote  _template_special.html"
 
+# _template_free.html を discount 版から派生させる
+sed \
+ -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|FREE PASS{{TITLE_SUFFIX}}|' \
+ -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Free Pass</div>|' \
+ -e 's|--ticket-a: #e07a35;|--ticket-a: #ff8fc4;|' \
+ -e 's|--ticket-b: #c9631f;|--ticket-b: #ef5a9d;|' \
+ -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
+ -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
+ -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト（音楽関係者のみ）</div>|' \
+ -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | FREE PASS（音楽関係者のみ）@' \
+ _template_discount.html > _template_free.html
+echo "wrote  _template_free.html"
+
 # ルートページ: クーポン・招待セクションを除いたイベント案内（カウントダウンは残す）
 sed \
  -e 's|<title>STILL 045 — DISCOUNT PASS{{TITLE_SUFFIX}}</title>|<title>STILL 045 — 10/24 (SAT) @ BOOGIE 54</title>|' \
@@ -66,12 +82,14 @@ echo "wrote  index.html"
 disc_map=$(mktemp)
 special_map=$(mktemp)
 artist_map=$(mktemp)
-trap 'rm -f "$disc_map" "$special_map" "$artist_map"' EXIT
+free_map=$(mktemp)
+trap 'rm -f "$disc_map" "$special_map" "$artist_map" "$free_map"' EXIT
 
 # 人数注記。空文字なら .coupon-group:empty で非表示になる。
 GROUP_NOTE_DISCOUNT=""
 GROUP_NOTE_SPECIAL=""
 GROUP_NOTE_ARTIST="1枚で5名まで有効"
+GROUP_NOTE_FREE="1枚で3名まで有効"
 
 generate() {
   local dj="$1"
@@ -107,6 +125,12 @@ for entry in "${ARTIST_DJS[@]}"; do
   generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map" "$GROUP_NOTE_ARTIST"
 done
 
+for entry in "${FREE_DJS[@]}"; do
+  dj="${entry%%|*}"
+  slug="${entry##*|}"
+  generate "$dj" "${slug}-free" "_template_free.html" "$free_map" "$GROUP_NOTE_FREE"
+done
+
 {
   echo "# STILL 045 — パスURL一覧"
   echo
@@ -139,6 +163,14 @@ done
   while IFS=$'\t' read -r dj dir; do
     echo "| ${dj} | ${BASE_URL}/${dir}/ |"
   done < "$artist_map"
+  echo
+  echo "**フリーパス（FREE・音楽関係者のみ・UEのみ発行）:**"
+  echo
+  echo "| DJ | URL |"
+  echo "|----|-----|"
+  while IFS=$'\t' read -r dj dir; do
+    echo "| ${dj} | ${BASE_URL}/${dir}/ |"
+  done < "$free_map"
   echo
   echo "## ビルド"
   echo
