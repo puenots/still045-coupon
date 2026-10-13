@@ -1,6 +1,6 @@
-# STILL 045 — クーポンURL一覧
+# STILL 045 — パスURL一覧
 
-8/22 (SAT) @ BOOGIE 54。DJ別のクーポンURL。ルートはイベント案内のみ（クーポンなし）。
+10/24 (SAT) @ BOOGIE 54。DJ別のパスURL。ルートはイベント案内のみ（パスなし）。
 
 ## URL一覧
 
@@ -10,31 +10,29 @@
 
 | DJ | URL |
 |----|-----|
-| DJ TAC | https://045.djue.me/tac/ |
+| DJ Garnet | https://045.djue.me/garnet/ |
 | UE | https://045.djue.me/ue/ |
 | KEIGO | https://045.djue.me/keigo/ |
+| AMARI | https://045.djue.me/amari/ |
 | 鍋奉行 | https://045.djue.me/nabe/ |
 | BAPE | https://045.djue.me/bape/ |
-| Yuuki | https://045.djue.me/yuuki/ |
-| TAKEDA | https://045.djue.me/takeda/ |
 
-**DJ別 関係者ディスカウント（¥2,500 → ¥1,000）:**
+**DJ別 スペシャル（¥2,500 → ¥1,500）:**
 
 | DJ | URL |
 |----|-----|
-| DJ TAC | https://045.djue.me/tac-sp/ |
+| DJ Garnet | https://045.djue.me/garnet-1500/ |
+| UE | https://045.djue.me/ue-1500/ |
+| KEIGO | https://045.djue.me/keigo-1500/ |
+| AMARI | https://045.djue.me/amari-1500/ |
+| 鍋奉行 | https://045.djue.me/nabe-1500/ |
+| BAPE | https://045.djue.me/bape-1500/ |
+
+**音楽関係者（¥2,500 → ¥1,000・UEのみ発行）:**
+
+| DJ | URL |
+|----|-----|
 | UE | https://045.djue.me/ue-sp/ |
-| KEIGO | https://045.djue.me/keigo-sp/ |
-| 鍋奉行 | https://045.djue.me/nabe-sp/ |
-| BAPE | https://045.djue.me/bape-sp/ |
-| Yuuki | https://045.djue.me/yuuki-sp/ |
-| TAKEDA | https://045.djue.me/takeda-sp/ |
-
-**DJ別 フリーパス（FREE）:**
-
-| DJ | URL |
-|----|-----|
-| UE | https://045.djue.me/ue-free/ |
 
 ## ビルド
 
