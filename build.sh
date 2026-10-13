@@ -18,7 +18,7 @@ BASE_URL="https://045.djue.me"
 GA4_ID="G-4N9ENSKWVH"
 
 # "表示名|スラッグ"
-DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape")
+DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "BOOGIE54|boogie54")
 # 音楽関係者パス (¥1,000) を発行する人
 ARTIST_DJS=("UE|ue")
 
