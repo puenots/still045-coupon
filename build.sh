@@ -1,12 +1,13 @@
 #!/bin/bash
 # STILL 045 パスページを生成する。
-# - ディスカウント / オレンジ (¥2,500→¥2,000)          : _template_discount.html → ${slug}/
-# - スペシャル / ブルー (¥2,500→¥1,500)                : _template_special.html  → ${slug}-1500/
-# - 音楽関係者 / クリーム (¥2,500→¥1,000・UEのみ発行)  : _template_artist.html   → ${slug}-sp/
+# - ディスカウント / イエロー (¥2,500→¥2,000)          : _template_discount.html → ${slug}/
+# - スペシャル / オレンジ (¥2,500→¥1,500)                : _template_special.html  → ${slug}-1500/
+# - 音楽関係者 / ブルー (¥2,500→¥1,000・UEのみ発行)  : _template_artist.html   → ${slug}-sp/
 # - フリー / ピンク (FREE・音楽関係者のみ・UEのみ発行)  : _template_free.html     → ${slug}-free/
 # - ルート (イベント案内のみ・クーポンなし) : _template_discount.html から生成 → index.html
 # URLは読めるスラッグ固定（例: /ue/ と /ue-sp/）。独自ドメイン 045.djue.me で公開。
-# _template_special.html / _template_artist.html は _template_discount.html から派生生成する（正本は discount 側）。
+# チケットの地色は受付で渡すリストバンドの色と同じ（イエロー/オレンジ/ブルー/ピンク。当日客=グリーンはバンドのみ）。
+# _template_special.html / _template_artist.html / _template_free.html は _template_discount.html から派生生成する（正本は discount 側）。
 
 set -euo pipefail
 
@@ -29,8 +30,8 @@ FREE_DJS=("UE|ue")
 sed \
  -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|GUEST PASS{{TITLE_SUFFIX}}|' \
  -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Guest Pass</div>|' \
- -e 's|--ticket-a: #e07a35;|--ticket-a: #f0e4c8;|' \
- -e 's|--ticket-b: #c9631f;|--ticket-b: #d9c69a;|' \
+ -e 's|--ticket-a: #f7d21e;|--ticket-a: #47b6f0;|' \
+ -e 's|--ticket-b: #e6b900;|--ticket-b: #2391d6;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">¥1,000</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="関係者パス">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">音楽関係者専用</div>|' \
@@ -42,8 +43,8 @@ echo "wrote  _template_artist.html"
 sed \
  -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|SPECIAL PASS{{TITLE_SUFFIX}}|' \
  -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Special Pass</div>|' \
- -e 's|--ticket-a: #e07a35;|--ticket-a: #8dbbdd;|' \
- -e 's|--ticket-b: #c9631f;|--ticket-b: #5e93bd;|' \
+ -e 's|--ticket-a: #f7d21e;|--ticket-a: #e07a35;|' \
+ -e 's|--ticket-b: #e6b900;|--ticket-b: #c9631f;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">¥1,500</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="スペシャルパス">|' \
  -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | SPECIAL PASS ¥2,500 → ¥1,500@' \
@@ -54,8 +55,8 @@ echo "wrote  _template_special.html"
 sed \
  -e 's|DISCOUNT PASS{{TITLE_SUFFIX}}|FREE PASS{{TITLE_SUFFIX}}|' \
  -e 's|<div class="subtitle">Discount Pass</div>|<div class="subtitle">Free Pass</div>|' \
- -e 's|--ticket-a: #e07a35;|--ticket-a: #ff8fc4;|' \
- -e 's|--ticket-b: #c9631f;|--ticket-b: #ef5a9d;|' \
+ -e 's|--ticket-a: #f7d21e;|--ticket-a: #ff6ab5;|' \
+ -e 's|--ticket-b: #e6b900;|--ticket-b: #ef3f90;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
  -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト（音楽関係者のみ）</div>|' \
@@ -75,6 +76,7 @@ sed \
  -e "s|{{OG_IMAGE}}|${BASE_URL}/ogp.jpg|g" \
  -e 's|{{LOGO_SRC}}|logo.png|g' \
  -e 's|{{GROUP_NOTE}}||g' \
+ -e 's|{{BAND_NOTE}}||g' \
  _template_discount.html > index.html
 echo "wrote  index.html"
 
@@ -88,8 +90,14 @@ trap 'rm -f "$disc_map" "$special_map" "$artist_map" "$free_map"' EXIT
 # 人数注記。空文字なら .coupon-group:empty で非表示になる。
 GROUP_NOTE_DISCOUNT=""
 GROUP_NOTE_SPECIAL=""
-GROUP_NOTE_ARTIST="1枚で5名まで有効"
+GROUP_NOTE_ARTIST="1枚で3名まで有効"
 GROUP_NOTE_FREE="1枚で3名まで有効"
+
+# リストバンド注記（チケット地色と同じ色のバンドを受付で渡す）。空文字なら .coupon-band:empty で非表示。
+BAND_NOTE_DISCOUNT="受付でイエローのリストバンドをお渡しします"
+BAND_NOTE_SPECIAL="受付でオレンジのリストバンドをお渡しします"
+BAND_NOTE_ARTIST="受付でブルーのリストバンドをお渡しします"
+BAND_NOTE_FREE="受付でピンクのリストバンドをお渡しします"
 
 generate() {
   local dj="$1"
@@ -97,6 +105,7 @@ generate() {
   local template="$3"
   local map_file="$4"
   local group_note="$5"
+  local band_note="$6"
 
   printf '%s\t%s\n' "$dj" "$dir" >> "$map_file"
 
@@ -108,6 +117,7 @@ generate() {
       -e "s|{{OG_IMAGE}}|${BASE_URL}/og/${dir}.jpg|g" \
       -e 's|{{LOGO_SRC}}|../logo.png|g' \
       -e "s|{{GROUP_NOTE}}|${group_note}|g" \
+      -e "s|{{BAND_NOTE}}|${band_note}|g" \
       "$template" > "${dir}/index.html"
   echo "wrote  ${dir}/index.html"
 }
@@ -115,20 +125,20 @@ generate() {
 for entry in "${DJS[@]}"; do
   dj="${entry%%|*}"
   slug="${entry##*|}"
-  generate "$dj" "$slug" "_template_discount.html" "$disc_map" "$GROUP_NOTE_DISCOUNT"
-  generate "$dj" "${slug}-1500" "_template_special.html" "$special_map" "$GROUP_NOTE_SPECIAL"
+  generate "$dj" "$slug" "_template_discount.html" "$disc_map" "$GROUP_NOTE_DISCOUNT" "$BAND_NOTE_DISCOUNT"
+  generate "$dj" "${slug}-1500" "_template_special.html" "$special_map" "$GROUP_NOTE_SPECIAL" "$BAND_NOTE_SPECIAL"
 done
 
 for entry in "${ARTIST_DJS[@]}"; do
   dj="${entry%%|*}"
   slug="${entry##*|}"
-  generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map" "$GROUP_NOTE_ARTIST"
+  generate "$dj" "${slug}-sp" "_template_artist.html" "$artist_map" "$GROUP_NOTE_ARTIST" "$BAND_NOTE_ARTIST"
 done
 
 for entry in "${FREE_DJS[@]}"; do
   dj="${entry%%|*}"
   slug="${entry##*|}"
-  generate "$dj" "${slug}-free" "_template_free.html" "$free_map" "$GROUP_NOTE_FREE"
+  generate "$dj" "${slug}-free" "_template_free.html" "$free_map" "$GROUP_NOTE_FREE" "$BAND_NOTE_FREE"
 done
 
 {
