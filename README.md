@@ -19,6 +19,7 @@
 | Yuuki | https://045.djue.me/yuuki/ |
 | TAKEDA | https://045.djue.me/takeda/ |
 | BOOGIE54 | https://045.djue.me/boogie54/ |
+| STILL 045 | https://045.djue.me/still045/ |
 
 **DJ別 スペシャル（¥2,500 → ¥1,500）:**
 

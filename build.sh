@@ -21,6 +21,8 @@ GA4_ID="G-4N9ENSKWVH"
 
 # "表示名|スラッグ"
 DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "TAKEDA|takeda" "BOOGIE54|boogie54")
+# ディスカウント (¥2,000) だけ作る配布者: STILL 045 の Instagram アカウント配布用
+DISC_ONLY_DJS=("STILL 045|still045")
 # 音楽関係者パス (¥1,000) を発行する人
 ARTIST_DJS=("UE|ue")
 # フリーパスを発行する人
@@ -127,6 +129,12 @@ for entry in "${DJS[@]}"; do
   slug="${entry##*|}"
   generate "$dj" "$slug" "_template_discount.html" "$disc_map" "$GROUP_NOTE_DISCOUNT" "$BAND_NOTE_DISCOUNT"
   generate "$dj" "${slug}-1500" "_template_special.html" "$special_map" "$GROUP_NOTE_SPECIAL" "$BAND_NOTE_SPECIAL"
+done
+
+for entry in "${DISC_ONLY_DJS[@]}"; do
+  dj="${entry%%|*}"
+  slug="${entry##*|}"
+  generate "$dj" "$slug" "_template_discount.html" "$disc_map" "$GROUP_NOTE_DISCOUNT" "$BAND_NOTE_DISCOUNT"
 done
 
 for entry in "${ARTIST_DJS[@]}"; do
