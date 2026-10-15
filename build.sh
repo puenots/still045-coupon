@@ -105,23 +105,6 @@ BAND_NOTE_SPECIAL=""
 BAND_NOTE_ARTIST=""
 BAND_NOTE_FREE=""
 
-# カレンダー登録用 .ics(当日 15:00 に通知・説明欄にそのページのパス URL)
-write_ics() {
-  local dir="$1"
-  printf '%s\r\n' \
-    "BEGIN:VCALENDAR" "VERSION:2.0" "PRODID:-//djue//still045//JA" "METHOD:PUBLISH" \
-    "BEGIN:VEVENT" \
-    "UID:still045-20261024-${dir}@045.djue.me" \
-    "DTSTAMP:20261015T000000Z" \
-    "DTSTART:20261024T090000Z" "DTEND:20261024T210000Z" \
-    "SUMMARY:STILL 045 R&B Special @ BOOGIE 54" \
-    "LOCATION:BOOGIE 54 横浜市中区長者町6-111 B1F" \
-    "DESCRIPTION:入口でパスを見せてください\\n${BASE_URL}/${dir}/" \
-    "URL:${BASE_URL}/${dir}/" \
-    "BEGIN:VALARM" "ACTION:DISPLAY" "DESCRIPTION:STILL 045 今日 18:00〜" "TRIGGER:-PT3H" "END:VALARM" \
-    "END:VEVENT" "END:VCALENDAR" > "${dir}/still045.ics"
-}
-
 generate() {
   local dj="$1"
   local dir="$2"
@@ -141,7 +124,6 @@ generate() {
   case "$dir" in *-1500) body_class="" ;; esac
 
   mkdir -p "$dir"
-  write_ics "${dir}"
   sed -e "s|{{DJ_NAME}}|${dj}|g" \
       -e "s|{{TITLE_SUFFIX}}| (${dj})|g" \
       -e "s|{{GA4_ID}}|${GA4_ID}|g" \
