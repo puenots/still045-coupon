@@ -349,7 +349,6 @@
     width: 100%;
     margin-top: 14px;
   }
-  .actions.two { grid-template-columns: repeat(2, 1fr); }
   .act {
     display: flex;
     flex-direction: column;
@@ -367,7 +366,6 @@
     text-decoration: none;
     -webkit-tap-highlight-color: transparent;
   }
-  .act[hidden] { display: none; }
   .act:active { background: rgba(245, 243, 239, 0.12); }
   .act svg { width: 20px; height: 20px; }
   .act.line svg { color: #06c755; }
@@ -465,19 +463,24 @@
     line.href = "https://line.me/R/share?text=" + encodeURIComponent(text);
     var cal = document.getElementById("act-cal");
     var ua = navigator.userAgent;
-    // Instagram のアプリ内ブラウザでは .ics が開かないのでカレンダーを出さない
-    if (/Instagram/.test(ua)) {
-      cal.hidden = true;
-      cal.parentNode.classList.add("two");
-    }
+    var gcal = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+      "&text=" + encodeURIComponent("STILL 045 R&B Special @ BOOGIE 54") +
+      "&dates=20261024T090000Z/20261024T210000Z" +
+      "&location=" + encodeURIComponent("BOOGIE 54 横浜市中区長者町6-111 B1F") +
+      "&details=" + encodeURIComponent("入口でパスを見せてください\n" + pageUrl);
     if (!/iPhone|iPad|iPod|Macintosh/.test(ua)) {
-      cal.href = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-        "&text=" + encodeURIComponent("STILL 045 R&B Special @ BOOGIE 54") +
-        "&dates=20261024T090000Z/20261024T210000Z" +
-        "&location=" + encodeURIComponent("BOOGIE 54 横浜市中区長者町6-111 B1F") +
-        "&details=" + encodeURIComponent("入口でパスを見せてください\n" + pageUrl);
+      cal.href = gcal;
       cal.target = "_blank";
       cal.rel = "noopener";
+    }
+    // Instagram のアプリ内ブラウザは .ics を開けない → Instagram 自身の scheme で外のブラウザに渡す
+    if (/Instagram/.test(ua)) {
+      if (/iPhone|iPad|iPod/.test(ua)) {
+        cal.href = "instagram://extbrowser/?url=" + encodeURIComponent(pageUrl + "still045.ics");
+      } else {
+        cal.href = "intent://" + gcal.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+      }
+      cal.removeAttribute("target");
     }
     [["act-line", "pass_share_line"], ["act-cal", "pass_add_calendar"], ["act-map", "pass_open_map"]].forEach(function (p) {
       document.getElementById(p[0]).addEventListener("click", function () {
