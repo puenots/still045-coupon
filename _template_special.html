@@ -212,17 +212,34 @@
   }
   .coupon-sub small {
     display: block;
-    font-weight: 500;
-    font-size: 11px;
-    color: rgba(7, 6, 5, 0.8);
-    letter-spacing: 0.5px;
-    line-height: 1.6;
-    margin-top: 5px;
+    margin: 12px -4px 0;
+    padding: 10px 12px 11px;
+    background: var(--night);
+    color: var(--cream);
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 0.3px;
+    line-height: 1.55;
+    word-break: keep-all;
   }
+  .coupon-sub small .hd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: var(--ticket-a);
+    margin-bottom: 2px;
+  }
+  .coupon-sub small .hd svg { width: 22px; height: 22px; color: var(--cream); flex: none; }
   .coupon-sub small strong {
     font-weight: 900;
-    color: var(--night);
-    border-bottom: 2px solid rgba(7, 6, 5, 0.35);
+    font-size: 13px;
+    color: var(--cream);
+    border-bottom: 2px solid var(--ticket-a);
   }
 
   .coupon-group:empty { display: none; }
@@ -391,7 +408,7 @@
       <div class="label">Door Charge</div>
       <div class="coupon-was">¥2,500</div>
       <div class="coupon-value">¥1,500</div>
-      <div class="coupon-sub">この画面を入口スタッフにお見せください<small>📷 エントランスは電波が入りません<br><strong>スクリーンショットを保存</strong>してお越しください</small></div>
+      <div class="coupon-sub">この画面を入口スタッフにお見せください<small class="nosig"><span class="hd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 19v-2M9 19v-5M14 19v-8M19 19V8"/><path d="M3 5l18 15" stroke="#d6323d" stroke-width="2.2"/></svg>入口は圏外</span><strong>スクショを保存</strong><wbr>してお越しください</small></div>
       <div class="coupon-group">{{GROUP_NOTE}}</div>
       <div class="coupon-band">{{BAND_NOTE}}</div>
     </section>
