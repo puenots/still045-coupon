@@ -94,10 +94,10 @@ GROUP_NOTE_ARTIST="1枚で3名まで有効"
 GROUP_NOTE_FREE="1枚で3名まで有効"
 
 # リストバンド注記（チケット地色と同じ色のバンドを受付で渡す）。空文字なら .coupon-band:empty で非表示。
-BAND_NOTE_DISCOUNT="受付でイエローのリストバンドをお渡しします"
-BAND_NOTE_SPECIAL="受付でオレンジのリストバンドをお渡しします"
-BAND_NOTE_ARTIST="受付でブルーのリストバンドをお渡しします"
-BAND_NOTE_FREE="受付でピンクのリストバンドをお渡しします"
+BAND_NOTE_DISCOUNT="受付でイエローの<wbr>リストバンドをお渡しします"
+BAND_NOTE_SPECIAL="受付でオレンジの<wbr>リストバンドをお渡しします"
+BAND_NOTE_ARTIST="受付でブルーの<wbr>リストバンドをお渡しします"
+BAND_NOTE_FREE="受付でピンクの<wbr>リストバンドをお渡しします"
 
 generate() {
   local dj="$1"
