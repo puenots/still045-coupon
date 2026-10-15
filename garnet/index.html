@@ -349,6 +349,8 @@
     width: 100%;
     margin-top: 14px;
   }
+  .no-share .actions { grid-template-columns: repeat(2, 1fr); }
+  .no-share .act.line { display: none; }
   .act {
     display: flex;
     flex-direction: column;
@@ -372,7 +374,7 @@
   .act .ic { color: var(--orange-2); }
 </style>
 </head>
-<body class="">
+<body class="has-actions">
   <main class="wrap">
     <h1 class="title"><img class="logo" src="../logo.png" alt="STILL 045"></h1>
     <div class="genre">R<span class="amp">&amp;</span>B Special</div>

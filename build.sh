@@ -23,8 +23,6 @@ GA4_ID="G-4N9ENSKWVH"
 DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "TAKEDA|takeda" "BOOGIE54|boogie54")
 # ディスカウント (¥2,000) だけ作る配布者: STILL 045 の Instagram アカウント配布用
 DISC_ONLY_DJS=("STILL 045|still045")
-# 「友達に送る / カレンダー / 地図」ボタンを出す配布者(スラッグ)。お試し中=UE のみ
-ACTION_SLUGS=("ue")
 # 音楽関係者パス (¥1,000) を発行する人
 ARTIST_DJS=("UE|ue")
 # フリーパスを発行する人
@@ -132,13 +130,9 @@ generate() {
 
   printf '%s\t%s\n' "$dj" "$dir" >> "$map_file"
 
-  local body_class=""
-  local s
-  for s in "${ACTION_SLUGS[@]}"; do
-    if [ "$dir" = "$s" ] || [ "${dir#"$s"-}" != "$dir" ]; then body_class="has-actions"; fi
-  done
-  # ¥1,500 は外に出さないパスなのでボタンを付けない
-  case "$dir" in *-1500) body_class="" ;; esac
+  # 便利ボタン: 全パスに「友達に送る / カレンダー / 地図」。¥1,500 は外に出さないので「友達に送る」なし
+  local body_class="has-actions"
+  case "$dir" in *-1500) body_class="has-actions no-share" ;; esac
 
   mkdir -p "$dir"
   write_ics "${dir}"
