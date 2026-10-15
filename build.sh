@@ -23,6 +23,8 @@ GA4_ID="G-4N9ENSKWVH"
 DJS=("DJ Garnet|garnet" "UE|ue" "KEIGO|keigo" "AMARI|amari" "鍋奉行|nabe" "BAPE|bape" "Yuuki|yuuki" "TAKEDA|takeda" "BOOGIE54|boogie54")
 # ディスカウント (¥2,000) だけ作る配布者: STILL 045 の Instagram アカウント配布用
 DISC_ONLY_DJS=("STILL 045|still045")
+# 「友達に送る / カレンダー / 地図」ボタンを出す配布者(スラッグ)。お試し中=UE のみ
+ACTION_SLUGS=("ue")
 # 音楽関係者パス (¥1,000) を発行する人
 ARTIST_DJS=("UE|ue")
 # フリーパスを発行する人
@@ -79,6 +81,8 @@ sed \
  -e 's|{{LOGO_SRC}}|logo.png|g' \
  -e 's|{{GROUP_NOTE}}||g' \
  -e 's|{{BAND_NOTE}}||g' \
+ -e 's|{{BODY_CLASS}}||g' \
+ -e "s|{{PAGE_URL}}|${BASE_URL}/|g" \
  _template_discount.html > index.html
 echo "wrote  index.html"
 
@@ -101,6 +105,23 @@ BAND_NOTE_SPECIAL=""
 BAND_NOTE_ARTIST=""
 BAND_NOTE_FREE=""
 
+# カレンダー登録用 .ics(当日 15:00 に通知・説明欄にそのページのパス URL)
+write_ics() {
+  local dir="$1"
+  printf '%s\r\n' \
+    "BEGIN:VCALENDAR" "VERSION:2.0" "PRODID:-//djue//still045//JA" "METHOD:PUBLISH" \
+    "BEGIN:VEVENT" \
+    "UID:still045-20261024-${dir}@045.djue.me" \
+    "DTSTAMP:20261015T000000Z" \
+    "DTSTART:20261024T090000Z" "DTEND:20261024T210000Z" \
+    "SUMMARY:STILL 045 R&B Special @ BOOGIE 54" \
+    "LOCATION:BOOGIE 54 横浜市中区長者町6-111 B1F" \
+    "DESCRIPTION:入口でパスを見せてください\\n${BASE_URL}/${dir}/" \
+    "URL:${BASE_URL}/${dir}/" \
+    "BEGIN:VALARM" "ACTION:DISPLAY" "DESCRIPTION:STILL 045 今日 18:00〜" "TRIGGER:-PT3H" "END:VALARM" \
+    "END:VEVENT" "END:VCALENDAR" > "${dir}/still045.ics"
+}
+
 generate() {
   local dj="$1"
   local dir="$2"
@@ -111,7 +132,16 @@ generate() {
 
   printf '%s\t%s\n' "$dj" "$dir" >> "$map_file"
 
+  local body_class=""
+  local s
+  for s in "${ACTION_SLUGS[@]}"; do
+    if [ "$dir" = "$s" ] || [ "${dir#"$s"-}" != "$dir" ]; then body_class="has-actions"; fi
+  done
+  # ¥1,500 は外に出さないパスなのでボタンを付けない
+  case "$dir" in *-1500) body_class="" ;; esac
+
   mkdir -p "$dir"
+  write_ics "${dir}"
   sed -e "s|{{DJ_NAME}}|${dj}|g" \
       -e "s|{{TITLE_SUFFIX}}| (${dj})|g" \
       -e "s|{{GA4_ID}}|${GA4_ID}|g" \
@@ -120,6 +150,8 @@ generate() {
       -e 's|{{LOGO_SRC}}|../logo.png|g' \
       -e "s|{{GROUP_NOTE}}|${group_note}|g" \
       -e "s|{{BAND_NOTE}}|${band_note}|g" \
+      -e "s|{{BODY_CLASS}}|${body_class}|g" \
+      -e "s|{{PAGE_URL}}|${BASE_URL}/${dir}/|g" \
       "$template" > "${dir}/index.html"
   echo "wrote  ${dir}/index.html"
 }
