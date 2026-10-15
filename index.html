@@ -473,15 +473,6 @@
       cal.target = "_blank";
       cal.rel = "noopener";
     }
-    // Instagram のアプリ内ブラウザは .ics を開けない → Instagram 自身の scheme で外のブラウザに渡す
-    if (/Instagram/.test(ua)) {
-      if (/iPhone|iPad|iPod/.test(ua)) {
-        cal.href = "instagram://extbrowser/?url=" + encodeURIComponent(pageUrl + "still045.ics");
-      } else {
-        cal.href = "intent://" + gcal.replace(/^https:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
-      }
-      cal.removeAttribute("target");
-    }
     [["act-line", "pass_share_line"], ["act-cal", "pass_add_calendar"], ["act-map", "pass_open_map"]].forEach(function (p) {
       document.getElementById(p[0]).addEventListener("click", function () {
         if (typeof gtag === "function") gtag("event", p[1]);
