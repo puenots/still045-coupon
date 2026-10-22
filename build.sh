@@ -61,8 +61,8 @@ sed \
  -e 's|--ticket-b: #e6b900;|--ticket-b: #ef3f90;|' \
  -e 's|<div class="coupon-value">¥2,000</div>|<div class="coupon-value">FREE</div>|' \
  -e 's|aria-label="ディスカウントパス">|aria-label="フリーパス">|' \
- -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト（音楽関係者のみ）</div>|' \
- -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | FREE PASS（音楽関係者のみ）@' \
+ -e 's|<div class="coupon-tag"></div>|<div class="coupon-tag">フリーゲスト<br><span style="letter-spacing:.5px;font-size:10px;white-space:nowrap">DJ・MC・ダンサー・オーガナイザーのみ</span></div>|' \
+ -e 's@STILL 045 | DISCOUNT PASS ¥2,500 → ¥2,000@STILL 045 | FREE PASS（DJ・MC・ダンサー・オーガナイザーのみ）@' \
  _template_discount.html > _template_free.html
 echo "wrote  _template_free.html"
 
